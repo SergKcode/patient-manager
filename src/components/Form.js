@@ -1,7 +1,8 @@
 import React, {useState} from "react";
+import shortid from "shortid"
 
-const Form=()=>{
-    const [meeting, setMeeting]= useState({
+const Form=({createMeeting})=>{
+    const [meeting, setUpdateMeeting]= useState({
         pet:"",
         owner:"",
         date:"",
@@ -12,8 +13,8 @@ const Form=()=>{
     const[error, setError]=useState(false);
 
     //This function is going to execute when the user is writting in the input
-    const handlerSetMeeting=(e)=>{
-        setMeeting({
+    const handlersetUpdateMeeting=(e)=>{
+        setUpdateMeeting({
             ...meeting,
             [e.target.name]:e.target.value
 
@@ -29,10 +30,25 @@ const Form=()=>{
         
 
         //Validation
-        if (pet.trim() === "" || owner.trim() === "" ||date.trim() === "" ||time.trim() === "" ||symptoms.trim() === ""){
-            setError(true) 
+        if (pet.trim() === '' || owner.trim() === '' ||date.trim() === ''||time.trim() === '' ||symptoms.trim() === ''){
+            setError(true);
             return;
         }
+        //Delete previous message
+        setError(false)
+        //Assign Id
+        meeting.id= shortid.generate()
+
+        createMeeting(meeting);
+        //Reset form
+        setUpdateMeeting({
+            pet:"",
+            owner:"",
+            date:"",
+            time:"",
+            symptoms:""
+        })
+        
     }
     return (
         <>
@@ -46,7 +62,7 @@ const Form=()=>{
                 name="pet"
                 className="u-full-width"
                 placeholder="Pet name"
-                onChange={handlerSetMeeting}
+                onChange={handlersetUpdateMeeting}
                 value={pet}
                 />
                 <label>Owner's Name</label>
@@ -55,7 +71,7 @@ const Form=()=>{
                 name="owner"
                 className="u-full-width"
                 placeholder="Owner's Name"
-                onChange={handlerSetMeeting}
+                onChange={handlersetUpdateMeeting}
                 value={owner}
                 />
                 <label>Date</label>
@@ -63,7 +79,7 @@ const Form=()=>{
                 type="date"
                 name="date"
                 className="u-full-width"
-                onChange={handlerSetMeeting}
+                onChange={handlersetUpdateMeeting}
                 value={date}
                 
                 />
@@ -72,14 +88,14 @@ const Form=()=>{
                 type="time"
                 name="time"
                 className="u-full-width"
-                onChange={handlerSetMeeting}
+                onChange={handlersetUpdateMeeting}
                 value={time}
                 />
                 <label>symptoms</label>
                 <textarea 
                 name="symptoms"
                 className="u-full-width"
-                onChange={handlerSetMeeting}
+                onChange={handlersetUpdateMeeting}
                 value={symptoms}
                 ></textarea>
                 <button
