@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import Form from "./components/Form"
 
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
       <h1>Patient Manager</h1>
       <div className="container">
         <div className="row">
-        <div className="one-half column">1</div>
+        <div className="one-half column">
+          <Form/>
+        </div>
         <div className="one-half column">2</div>
         </div>
       </div>

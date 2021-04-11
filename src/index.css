@@ -19,6 +19,14 @@ h1, h2  {
   font-family: 'Staatliches', cursive;
   letter-spacing: 1px;
 }
+button{
+  
+  color:#E89648;
+  background-color: #9C5511;
+}
+button:hover{
+  color: white;
+}
 
 /* color: #61dafb; #282c34 */
 .lista-citas .media {
