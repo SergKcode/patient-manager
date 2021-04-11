@@ -8,18 +8,38 @@ const Form=()=>{
         time:"",
         symptoms:""
     });
+
+    const[error, setError]=useState(false);
+
+    //This function is going to execute when the user is writting in the input
     const handlerSetMeeting=(e)=>{
         setMeeting({
             ...meeting,
-            [e.target.name]:[e.target.value]
+            [e.target.name]:e.target.value
 
         })
     }
-    const{owner, date, time,symptoms, pet} = meeting
+    //Destructuring values
+    const{owner, date, time,symptoms, pet} = meeting;
+
+    //When the user press add meeting button
+
+    const submitMeeting =(e)=>{
+        e.preventDefault();
+        
+
+        //Validation
+        if (pet.trim() === "" || owner.trim() === "" ||date.trim() === "" ||time.trim() === "" ||symptoms.trim() === ""){
+            setError(true) 
+            return;
+        }
+    }
     return (
         <>
             <h2> Create a meeting</h2>
-            <form>
+            {error ? <p className="alerta-error">All fields are required </p> : null}
+            <form onSubmit={submitMeeting}
+            >
                 <label>Pet Name</label>
                 <input
                 type="text"
